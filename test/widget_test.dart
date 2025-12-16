@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// test/widget_test.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:myapp/main.dart';
+import 'package:myapp/main.dart'; 
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  // ลบโค้ด Counter Test เดิมออกทั้งหมด
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Rshop app displays title and product list', (WidgetTester tester) async {
+    // 1. แก้ไขชื่อคลาสให้เป็น RshopApp ที่ถูกต้อง
+    await tester.pumpWidget(const RshopApp()); // <<< แก้ไขชื่อ Class
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  // 2. ตรวจสอบ Title (อ้างอิงจาก main.dart คือ 'Rshop Shop')
+    expect(find.text('Rshop Shop'), findsOneWidget); 
+    
+    // 3. ตรวจสอบว่า Widget ListView แสดงผล
+    expect(find.byType(ListView), findsOneWidget); 
+    
+    // 4. ตรวจสอบป้ายกำกับสินค้าตัวแรก (อ้างอิงจาก Asset Error คือ 'r01')
+    expect(find.text('r01'), findsOneWidget); 
   });
 }
